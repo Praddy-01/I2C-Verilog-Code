@@ -26,7 +26,6 @@ module i2c_controller(
 	localparam READ_ACK2 = 7;
 	localparam STOP = 8;
 	
-	localparam DIVIDE_BY = 4;
 
 	reg [7:0] state;
 	reg [7:0] saved_addr;
@@ -43,7 +42,7 @@ module i2c_controller(
 	assign i2c_sda = (write_enable == 1) ? sda_out : 'bz;
 	
 	always @(posedge clk) begin
-		if (counter2 == (DIVIDE_BY/2) - 1) begin
+		if (counter2 == 1) begin
 			i2c_clk <= ~i2c_clk;
 			counter2 <= 0;
 		end
